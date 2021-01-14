@@ -14,4 +14,8 @@ class ApplicationController < ActionController::API
       def prepare_user
         @user = User.find(params[:id])
       end
+      
+      def current_category
+        @current_category ||= Category.find(params[:id])
+      end
 end
