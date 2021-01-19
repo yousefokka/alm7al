@@ -1964,3 +1964,15 @@ NameError (undefined local variable or method `json_string' for #<Api::V1::Categ
   
 app/controllers/api/v1/categories_controller.rb:8:in `index'
   [1m[36mCACHE Category Load (0.0ms)[0m  [1m[34mSELECT `categories`.* FROM `categories` WHERE `categories`.`user_id` = 2 LIMIT 11[0m
+Started GET "/api/v1/users/2/categories" for ::1 at 2021-01-20 01:39:10 +0200
+  [1m[35m (0.3ms)[0m  [1m[35mSET  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by Api::V1::CategoriesController#index as */*
+  Parameters: {"title"=>"fish hot", "price"=>"22", "user_id"=>"2", "category"=>{"title"=>"fish hot"}}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`auth_token` = '_j-iqFeUaBSkxpjFctFw' LIMIT 1[0m
+  ↳ app/controllers/application_controller.rb:3:in `current_user'
+  [1m[36mCategory Load (0.8ms)[0m  [1m[34mSELECT `categories`.* FROM `categories` WHERE `categories`.`user_id` = 2[0m
+  ↳ app/controllers/api/v1/categories_controller.rb:9:in `index'
+Completed 200 OK in 30ms (Views: 7.1ms | ActiveRecord: 7.8ms | Allocations: 17577)
+
+

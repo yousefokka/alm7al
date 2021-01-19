@@ -1,9 +1,10 @@
 class  Api::V1::ItemsController < ApplicationController
+  before_action :authenticate_with_token!, only: [:create, :update, :destroy]
   before_action :set_item, only: [:show, :update, :destroy]
 
   # GET /items
   def index
-    @items = Item.all
+    @items = current_category.items.all
 
     render json: @items
   end
@@ -43,6 +44,10 @@ class  Api::V1::ItemsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_item
       @item = current_category.item.find(params[:id])
+    end
+
+    def current_category
+      @current_category ||= Category.find(params[:categories_id])
     end
 
     # Only allow a trusted parameter "white list" through.
