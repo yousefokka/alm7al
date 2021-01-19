@@ -15,7 +15,9 @@ class ApplicationController < ActionController::API
         @user = User.find(params[:id])
       end
       
-      def current_category
-        @current_category ||= Category.find(params[:id])
+      def current_type
+        @current_type ||= Type.find(params[:id])
       end
+
+
 end

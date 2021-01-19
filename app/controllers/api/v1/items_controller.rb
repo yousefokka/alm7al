@@ -36,6 +36,7 @@ class  Api::V1::ItemsController < ApplicationController
   # DELETE /items/1
   def destroy
     @item.destroy
+    @item.image.purge
   end
 
   private
@@ -46,6 +47,6 @@ class  Api::V1::ItemsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def item_params
-      params.require(:item).permit(:title, :price)
+      params.require(:item).permit(:title, :price, :image)
     end
 end

@@ -1,4 +1,4 @@
-class Category < ApplicationRecord
+class Type < ApplicationRecord
     belongs_to :user
     has_many :items
 end

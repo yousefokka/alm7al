@@ -1,12 +1,13 @@
 class  Api::V1::CategoriesController < ApplicationController
+  before_action :authenticate_with_token!, only: [:create, :update, :destroy]
   before_action :set_category, only: [:show, :update, :destroy]
 
   # GET /categories
   def index
-    @categories = Category.all
+    @categories = current_user.categories.all
 
     render json: @categories
-  end
+    end
 
   # GET /categories/1
   def show
@@ -15,10 +16,10 @@ class  Api::V1::CategoriesController < ApplicationController
 
   # POST /categories
   def create
-    @category = current_user.category.new(category_params)
+    @category = current_user.categories.new(category_params)
 
     if @category.save
-      render json: @category, status: :created, location: @category
+      render json: @category, status: :created
     else
       render json: @category.errors, status: :unprocessable_entity
     end
