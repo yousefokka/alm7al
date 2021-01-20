@@ -5,7 +5,7 @@ Rails.application.routes.draw do
         namespace :v1 do
           resources :sessions, :only => [:create, :destroy] 
           resources :users, :only => [:show, :create, :update, :destroy]  do 
-            resources :categories do 
+            resources :categories do  
               resources :items
             end
           end

@@ -11,7 +11,7 @@ local:
    service: S3
    access_key_id: AKIAUNEO7KWZNJH3YZ4L
    secret_access_key: nrcfEA8QEpcUeIvKVa7cE9DhurpI8lEDzB+biPVi
-   region: US East (Ohio) us-east-2
+   region: us-east-2
    bucket: alm7al
 
 # Remember not to checkin your GCS keyfile to a repository

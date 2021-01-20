@@ -1,5 +1,4 @@
 class  Api::V1::ItemsController < ApplicationController
-  before_action :authenticate_with_token!, only: [:create, :update, :destroy]
   before_action :set_item, only: [:show, :update, :destroy]
 
   # GET /items
@@ -16,10 +15,10 @@ class  Api::V1::ItemsController < ApplicationController
 
   # POST /items
   def create
-    @item = current_category.item.new(item_params)
+    @item = current_category.items.new(item_params)
 
     if @item.save
-      render json: @item, status: :created, location: @item
+      render json: @item, status: :created
     else
       render json: @item.errors, status: :unprocessable_entity
     end
@@ -47,11 +46,11 @@ class  Api::V1::ItemsController < ApplicationController
     end
 
     def current_category
-      @current_category ||= Category.find(params[:categories_id])
+      @current_category ||= Category.find(params[:category_id])
     end
-
+    
     # Only allow a trusted parameter "white list" through.
     def item_params
-      params.require(:item).permit(:title, :price, :image)
+      params.require(:item).permit(:title, :price, :avatar)
     end
 end
