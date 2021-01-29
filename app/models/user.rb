@@ -3,6 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   has_many :categories
   has_many :types
+  has_many :orders
  
   validates :auth_token, uniqueness: true
   devise :database_authenticatable, :registerable,

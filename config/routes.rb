@@ -1,13 +1,20 @@
 Rails.application.routes.draw do
   
+  
+  resources :itemimages
   devise_for :users
       namespace :api do
         namespace :v1 do
           resources :sessions, :only => [:create, :destroy] 
           resources :users, :only => [:show, :create, :update, :destroy]  do 
             resources :categories do  
-              resources :items
+              resources :items do
+                resources :itemimages
+              end
             end
+            resources :orders do 
+              resources :carts
+            end 
           end
         end
       end

@@ -1,4 +1,5 @@
 class Item < ApplicationRecord
+    has_one :itemimage
     belongs_to :category
-    has_one_attached :avatar
+    belongs_to :cart
 end
