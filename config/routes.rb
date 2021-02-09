@@ -19,9 +19,12 @@ Rails.application.routes.draw do
               resources :carts
               end
           end 
-          resources :categories do   :only => [:show , index] 
-            resources :items do   :only => [:show , index]
+          resources :categories,    :only => [:show , :index] do 
+            resources :items,  :only => [:show , :index] do 
         end 
       end 
+    end
+  end
+  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
