@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       namespace :api do
         namespace :v1 do
           resources :sessions, :only => [:create, :destroy] 
-          resources :admins, :only => [:show, :create, :update, :destroy]  do 
+          resources :admins, :only => [:create]  do 
             resources :categories do  
               resources :items do
                 resources :itemimages
@@ -19,6 +19,8 @@ Rails.application.routes.draw do
               resources :carts
               end
           end 
+          resources :categories do   :only => [:show , index] 
+            resources :items do   :only => [:show , index]
         end 
       end 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
