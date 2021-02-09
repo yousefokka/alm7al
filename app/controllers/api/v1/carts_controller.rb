@@ -1,10 +1,9 @@
 class Api::V1::CartsController < ApplicationController
   before_action :set_cart, only: [:show, :update, :destroy]
-
   # GET /carts
   def index
     @carts = current_order.carts.all
-    @carts= Item.find_by("item_id = ?",  params[:item_id])
+    
     render json: @carts
   end
 
@@ -15,18 +14,20 @@ class Api::V1::CartsController < ApplicationController
 
   # POST /carts
   def create
-    @cart = current_order.carts.new(cart_params)
+   @cart =  current_order.carts.create(carts_params)
 
-    if @cart.save
-      render json: @cart, status: :created
-    else
-      render json: @cart.errors, status: :unprocessable_entity
-    end
+   render json: @cart , status: :created
+
+   # if @cart.save
+    #  render json: @cart, status: :created
+    #else
+     # render json: @cart.errors, status: :unprocessable_entity
+    #end
   end
 
   # PATCH/PUT /carts/1
   def update
-    if @cart.update(cart_params)
+    if @cart.update(carts_params)
       render json: @cart
     else
       render json: @cart.errors, status: :unprocessable_entity
@@ -41,7 +42,7 @@ class Api::V1::CartsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cart
-      @cart = current_order.cart.find(params[:id])
+      @cart = current_order.carts.find(params[:id])
     end
 
 
@@ -50,7 +51,8 @@ class Api::V1::CartsController < ApplicationController
     end
 
     # Only allow a trusted parameter "white list" through.
-    def cart_params
-      params.require(:cart).permit(:item_id ,:qty)
+    def carts_params
+      params.permit( :user_id ,:order_id,cart: [:item_id, :qty]).require(:cart)
     end
 end
+ 

@@ -1,9 +1,9 @@
-class User < ApplicationRecord
+class Admin < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  
-  has_many :orders
- 
+
+  has_many :categories
+
   validates :auth_token, uniqueness: true
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
@@ -14,4 +14,5 @@ class User < ApplicationRecord
       self.auth_token = Devise.friendly_token
     end while self.class.exists?(auth_token: auth_token)
   end
+
 end

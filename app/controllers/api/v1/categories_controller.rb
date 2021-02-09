@@ -1,10 +1,10 @@
 class  Api::V1::CategoriesController < ApplicationController
-  before_action :authenticate_with_token!, only: [:create, :update, :destroy]
+  before_action :admin_authenticate_with_token!, only: [:create, :update, :destroy]
   before_action :set_category, only: [:show, :update, :destroy]
 
   # GET /categories
   def index
-    @categories = current_user.categories.all
+    @categories = current_admin.categories.all
 
     render json: @categories
     end
@@ -16,7 +16,7 @@ class  Api::V1::CategoriesController < ApplicationController
 
   # POST /categories
   def create
-    @category = current_user.categories.new(category_params)
+    @category = current_admin.categories.new(category_params)
 
     if @category.save
       render json: @category, status: :created
@@ -42,7 +42,7 @@ class  Api::V1::CategoriesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_category
-      @category = current_user.category.find(params[:id])
+      @category = current_admin.category.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

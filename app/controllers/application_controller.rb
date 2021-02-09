@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::API
-    def current_user
+     def current_user
         @current_user ||= User.find_by(auth_token: request.headers['Authorization']) 
       end
         
@@ -15,8 +15,16 @@ class ApplicationController < ActionController::API
         @user = User.find(params[:id])
       end
       
-      
+      def current_admin
+        @current_admin ||= Admin.find_by(auth_token: request.headers['Authorization']) 
+      end
 
-      
+      def admin_authenticate_with_token!
+        render json: { errors: "Not authenticated" },status: :unauthorized unless admin_signed_in?
+      end
+
+      def admin_signed_in?
+        current_admin.present? 
+      end
 
 end
