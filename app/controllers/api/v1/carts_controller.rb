@@ -2,8 +2,6 @@ class Api::V1::CartsController < ApplicationController
   before_action :set_cart, only: [:show, :update, :destroy]
   # GET /carts
   def index
-
-    byebug
     @carts = current_order.carts.all
 
     render json: @carts.as_json(include: :item)
