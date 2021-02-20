@@ -42,7 +42,12 @@ class  Api::V1::CategoriesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_category
-      @category = current_admin.category.find(params[:id])
+      @category = current_admin.categories.find(params[:id])
+    end
+
+
+    def current_admin
+      @current_admin ||= Admin.find(params[:admin_id])
     end
 
     # Only allow a trusted parameter "white list" through.
