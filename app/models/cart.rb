@@ -1,10 +1,7 @@
 class Cart < ApplicationRecord
   belongs_to :order
-  has_many :items
+  belongs_to :item  
   
-  
-
-
   def self.upsert_all(records)
     normalized = normalize(records)
     super(normalized)

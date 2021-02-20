@@ -3,8 +3,8 @@ class Api::V1::CartsController < ApplicationController
   # GET /carts
   def index
     @carts = current_order.carts.all
-    
-    render json: @carts
+
+    render json: @carts.as_json(include: :item)
   end
 
   # GET /carts/1
