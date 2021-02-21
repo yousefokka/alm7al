@@ -37,13 +37,12 @@ class  Api::V1::ItemsController < ApplicationController
   # DELETE /items/1
   def destroy
     @item.destroy
-    @item.image.purge
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_item
-      @item = current_category.item.find(params[:id])
+      @item = current_category.items.find(params[:id])
     end
 
     def current_category
